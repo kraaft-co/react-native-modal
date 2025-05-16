@@ -36,7 +36,7 @@ import {
   OrNull,
   PresentationStyle,
 } from './types';
-import { BackHandler } from './back-handler.js';
+import { BackHandler } from './back-handler';
 
 // Override default react-native-animatable animations
 initializeAnimations();
