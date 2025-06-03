@@ -612,10 +612,7 @@ export class ReactNativeModal extends React.Component {
     } = this.props;
     const { testID, ...containerProps } = otherProps;
     const computedStyle = [
-      {
-        margin: this.getDeviceWidth() * 0.05,
-        transform: [{ translateY: this.stableAnimatedValueZero }],
-      },
+      { margin: this.getDeviceWidth() * 0.05 },
       styles.content,
       style,
     ];
@@ -645,7 +642,11 @@ export class ReactNativeModal extends React.Component {
         ...panHandlers,
         // @ts-expect-error TODO fix it
         ref: ref => (this.contentRef = ref),
-        style: [panPosition, computedStyle],
+        style: [
+          panPosition,
+          { transform: [{ translateY: this.stableAnimatedValueZero }] },
+          computedStyle,
+        ],
         pointerEvents: 'box-none',
         useNativeDriver: useNativeDriver,
         ...containerProps,
@@ -681,7 +682,11 @@ export class ReactNativeModal extends React.Component {
             {
               behavior: Platform.OS === 'ios' ? 'padding' : undefined,
               pointerEvents: 'box-none',
-              style: computedStyle.concat([{ margin: 0 }]),
+              style: [
+                { transform: [{ translateY: 0 }] },
+                computedStyle,
+                { margin: 0 },
+              ],
             },
             containerView,
           )
